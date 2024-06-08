@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Zasoby</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="../static/mars.ico" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'panel_technologii.css' %}">
+</head>
+<body>
+
+
+<div class="navbar bg-base-10">
+    <div class="float-left">
+        <div class="flex-1">
+            <div class="static flex">
+                <img class="mb-1" src="../static/mars.ico" id="zdj"></a>
+                <h1 class="text-4xl mt-4 ml-5" style="font-family: Rubik">Panel Technologii</h1>
+            </div>
+            <h2 class="text-lg p-1 ml-20" style="font-family: Rubik">Oto panel mieszkańców.</h2>
+        </div>
+    </div>
+</div>
+
+<div class="flex flex-col justify-between">
+    <div class="static flex flex-row items-center justify-center">
+        <div class="card w-1/2 h-1/2 bg-base-100 shadow-xl mt-1">
+            <div>
+                <canvas id="Wykres_1" class="m-3"></canvas>
+            </div>
+        </div>
+        <label class="form-control mb-96">
+            <div class="label">
+                <span class="label-text ml-3">Wybiesz wykres, który chcesz zobaczyć</span>
+            </div>
+            <select  id="wykresSelect"  class="select w-full max-w-xs mx-4 flex-col py-2">
+                
+                
+            </select>
+        </label>
+    </div>
+
+
+
+        <div class="static flex flex-row ml-40">
+            <div class="overflow-x-auto ">
+                <div class="overflow-x-auto">
+                    <ul>
+                    {% for field in research %}
+
+                        <div class=" mb-5 flexcard card-side bg-base-100 bg-color-100 shadow-xl hover:bg-violet-600 rounded-lg">
+                        <a href="http://127.0.0.1:8000/research/{{field.id}}">
+                            <figure></figure>
+                            <div class="card-body">
+                                <h2 class="card-title">{{field.name}}</h2>
+                                <p class="mb-2">Poziom {{field.level.name}}</p>
+                                <progress class="progress progress-primary w-full text-green-500" value="50" max="100"></progress>
+                            </div>
+                        </a>
+                        </div>
+
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% include 'main.html' %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{% static 'theme.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'panel_technologii.js' %}"></script>
+</body>
+</html>

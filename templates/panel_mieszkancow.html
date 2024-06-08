@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zasoby</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="{% static 'mars.ico' %}" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="{% static 'panel_mieszkancow.css'%}">
+</head>
+<body>
+
+<div class="navbar bg-base-10">
+    <div class="float-left">
+        <div class="flex-1">
+            <div class="static flex">
+                <img class="mb-1" src="../static/mars.ico" id="zdj"></a>
+                <h1 class="text-4xl mt-4 ml-5" style="font-family: Rubik">Panel Mieszkańców</h1>
+            </div>
+            <h2 class="text-lg p-1 ml-20" style="font-family: Rubik">Oto panel mieszkańców.</h2>
+        </div>
+    </div>
+</div>
+
+<div class="flex flex-col justify-between">
+    <div class="static flex flex-row items-center justify-center">
+        <div class="card w-1/2 h-1/2 bg-base-100 shadow-xl mt-1">
+            <div>
+                <canvas id="Wykres_1" class="m-3"></canvas>
+            </div>
+        </div>
+        <label class="form-control mb-96">
+            
+            
+        </label>
+    </div>
+    
+    <div class="mx-40 mt-7">
+        <div class="mb-1 mr-10">
+            <form method="post">
+                {% csrf_token %}
+                <label class="form-control w-full mx-40 mt-3 mb-1">
+                    <div class="label">
+                        <span class="label-text">Podaj imie i nazwisko</span>
+                    </div>
+<!--                    <input type="text" placeholder="Wpisz tutaj" class="input input-bordered w-full max-w-xs" />-->
+                    {{searchBar.search}}
+                </label>
+                <div class=" flex space-x-1 mb-3">
+                    <button class="btn mx-40 mt-3" onclick="my_modal_4.showModal()">wyszukaj mieszkanców </button>
+                </div>
+            </form>
+        <div class=" flex space-x-1 mb-4">
+            <a href="http://127.0.0.1:8000/create-resident/"><button class="btn mx-40 mt-3" onclick="my_modal_4.showModal()">Dodaj pracownika</button></a>
+        </div>
+
+        <div class="static flex flex-row ml-40">
+            <div class="overflow-x-auto ">
+                <div class="overflow-x-auto">
+                    <table class="table table-xs max-w-ful mr-auto mb-5">
+                        <thead>
+                        <tr>
+
+                            <th>Imie  </th>
+                            <th>Nazwisko</th>
+                            <th>Data Urodzenia </th>
+                            <th>Data przybycia</th>
+                            <th>Praca </th>
+                            <th>Pokoj</th>
+                            <th>Grupa</th>
+                            <th>Nr Telefonu</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for field in residents %}
+                        <tr>
+
+                            <td>{{field.name}}</td>
+                            <td>{{field.surname}}</td>
+                            <td>{{field.birth_date}}</td>
+                            <td>{{field.arrival_date}}</td>
+                            <td>{{field.job}}</td>
+                            <td>{{field.live_place}}</td>
+                            <td>{{field.work_group}}</td>
+                            <td>{{field.phone_number}}</td>
+                            <td><a href="http://127.0.0.1:8000/update-resident/{{field.id}}"><button class="btn mx-40 mt-3" onclick="my_modal_4.showModal()">Modyfikuj dane pracownika </button></a></td>
+                        </tr>
+
+                        {% endfor %}
+
+<!--                        <tr>-->
+
+<!--                            <th>2</th>-->
+<!--                            <th>Kamil </th>-->
+<!--                            <th>Konieczny</th>-->
+<!--                            <th>20-03-2008 </th>-->
+<!--                            <th>21-04-2067</th>-->
+<!--                            <th></th>-->
+<!--                            <th></th>-->
+<!--                            <th></th>-->
+<!--                            <th>+48123456789</th>-->
+<!--                            <th><button class="btn mx-40 mt-3" onclick="my_modal_4.showModal()">Modyfikuj dane pracownika </button></th>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+
+<!--                            <th>3</th>-->
+<!--                            <th>Kamil </th>-->
+<!--                            <th>Konieczny</th>-->
+<!--                            <th>20-03-2008 </th>-->
+<!--                            <th>21-04-2067</th>-->
+<!--                            <th></th>-->
+<!--                            <th></th>-->
+<!--                            <th></th>-->
+<!--                            <th>+48123456789</th>-->
+<!--                            <th><button class="btn mx-40 mt-3" onclick="my_modal_4.showModal()">Modyfikuj dane pracownika </button></th>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+
+<!--                            <th>4</th>-->
+<!--                            <th>Kamil </th>-->
+<!--                            <th>Konieczny</th>-->
+<!--                            <th>20-03-2008 </th>-->
+<!--                            <th>21-04-2067</th>-->
+<!--                            <th></th>-->
+<!--                            <th></th>-->
+<!--                            <th></th>-->
+<!--                            <th>+48123456789</th>-->
+<!--                            <th><button class="btn mx-40 mt-3" onclick="my_modal_4.showModal()">Modyfikuj dane pracownika </button></th>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+
+<!--                            <th>5</th>-->
+<!--                            <th>Kamil </th>-->
+<!--                            <th>Konieczny</th>-->
+<!--                            <th>20-03-2008 </th>-->
+<!--                            <th>21-04-2067</th>-->
+<!--                            <th></th>-->
+<!--                            <th></th>-->
+<!--                            <th></th>-->
+<!--                            <th>+48123456789</th>-->
+<!--                            <th><button class="btn mx-40 mt-3" onclick="my_modal_4.showModal()">Modyfikuj dane pracownika </button></th>-->
+<!--                        </tr>-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+    <form method="POST" id="form">
+    <div>
+
+            {% csrf_token %}
+            <div class="overflow-x-auto mt-4">
+                <div class="mb-2 mt-4 text-4xl">
+                    <h1><center><b>Grafik<h1 id="date"></h1></b></center></h1>
+                </div>
+                <table class=" border-collapse table table-lg   w-fit  mx-48">
+                    <!-- head -->
+                    <thead>
+                    <tr>
+                        <th>grupy pracownicze</th>
+                        <th>Poniedzialek</th>
+                        <th>wtorek</th>
+                        <th>sroda</th>
+                        <th>czwartek</th>
+                        <th>piatek</th>
+                        <th>sobota</th>
+                        <th>niedziela</th>
+                    </tr>
+                    </thead>
+                    <tbody id="workTableBody">
+                    <!-- row 1 -->
+                    {% comment %} <tr>
+                        <th class="w-12 border border-slate-600">Poniedziałek</th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                    </tr>
+                    <!-- row 2 -->
+                    <tr>
+                        <th class="w-12 border border-slate-600">Poniedziałek</th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                    </tr>
+                    <tr>
+                        <th class="w-12 border border-slate-600">Poniedziałek</th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                    </tr>
+                    <tr>
+                        <th class="w-12 border border-slate-600">Poniedziałek</th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                    </tr>
+                    <tr>
+                        <th class="w-12 border border-slate-600">Poniedziałek</th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                    </tr>
+                    <tr>
+                        <th class="w-12 border border-slate-600">Poniedziałek</th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                    </tr>
+                    <tr>
+                        <th class="w-12 border border-slate-600">Poniedziałek</th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                        <th class="w-12 border border-slate-600"><textarea class="textarea  textarea-ghost resize-none" placeholder="Bio">Test</textarea></th>
+                    </tr> {% endcomment %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <div class="mt-5 mb-5 h-full flex justify-center items-center space-x-2">
+
+        <button class="btn">Generuj grafik</button>
+
+        <button id="decrement-date"class="btn">Poprzedni tydzień</button>
+
+        <button id="increment-date"class="btn">Następny tydzień</button>
+
+        <input id='submit' type='submit' class="btn" value="zatwierdz zmiany">
+
+    </div>
+        </form>
+{% include 'main.html' %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{% static 'theme.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'panel_mieszkancow.js' %}"></script>
+</body>
+</html>
